@@ -1,0 +1,96 @@
+<html>
+<head>
+</head>
+<title>
+Buyer Contact Info
+</title>
+<body>
+  <form class="searchBar" action="." method="post">
+{% csrf_token %}
+
+<input type="text"  name ="term" size="15"><input type="submit" value = "Search">
+
+  </form>
+
+
+<style >
+
+
+        table, th, td{
+            width:60%;
+        margin-left:20%;
+        margin-right:20%;
+                height: 10px;
+              border:1px solid black;
+              border-collapse:collapse;
+              }
+    th, td
+    {
+    padding: 5px;
+    text-align: center;
+    }
+
+    th
+    {
+    background-color: red;
+    color: black;
+    }
+</style>
+<table id="Buyers">
+
+
+    <tbody>
+        <tr>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>Email</th>
+            <th>Address</th>
+        </tr>
+        {%block looper%}
+        {% for index, row in table %}
+        <tr>
+          {% if term|lower in row.Name|lower or term in row.Phone or term|lower in row.Address|lower or term|lower in row.Email|lower %}
+            <td>{{row.Name}}</td>
+            <td>{{row.Phone}}</td>
+            <td>{{row.Email}}</td>
+            <td>{{row.Address}}</td>
+
+          {% endif %}
+
+        </tr>
+    </tbody>
+    {% endfor %}
+    {% endblock %}
+
+
+</table>
+
+
+<a href = {% url 'homepage' %} >Return to Main Table</a>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+{%block javascript%}
+$("#refreshButton").click(function(e){
+  e.preventDefault();
+
+  $.ajax({
+    type:'GET',
+    url:'refresh',
+    data:{'null':null},
+    success:function()
+    {
+      console.log("something's occured");
+    }
+
+  });
+
+});
+
+
+
+
+</script>
+{%endblock%}
+</body>
+</html>
