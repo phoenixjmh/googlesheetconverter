@@ -79,9 +79,9 @@ WSGI_APPLICATION = 'SheetServer.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE' : 'django.db.backends.mysql',
-        'NAME' : 'Buyer_Info',
-        'USER' :'root',
-        'PASSWORD' :'firebird12',
+        'NAME' : '*Name of Database*',
+        'USER' :'your_username_here',
+        'PASSWORD' :'your_password_here',
         'HOST' : '',
         'PORT': ''
     }
